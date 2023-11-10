@@ -2,49 +2,103 @@ package no.hvl.dat100.jplab11.oppgave3;
 
 import no.hvl.dat100.jplab11.common.TODO;
 import no.hvl.dat100.jplab11.oppgave1.*;
+import no.hvl.dat100.jplab11.oppgave2.Bilde;
+import no.hvl.dat100.jplab11.oppgave2.Tekst;
 
-public class Blogg {
+public class Blogg{
 
-	// TODO: objektvariable 
-
+	private int nesteledig; //angir antall Innlegg-objekt som er lagret i tabellen og dermed neste ledige posisjon i tabellen
+	private Innlegg[] innleggtabell; // er en referanse tabell av Innlegg-objekt.
+	private int lengde;
+	
 	public Blogg() {
-		throw new UnsupportedOperationException(TODO.constructor("Blogg"));
+		innleggtabell = new Innlegg[20];
+		nesteledig = 0;
+		
 	}
 
 	public Blogg(int lengde) {
-		throw new UnsupportedOperationException(TODO.constructor("Blogg"));
+		this.lengde = lengde;
+		innleggtabell = new Innlegg[lengde];
+		nesteledig = 0;
 	}
 
 	public int getAntall() {
-		throw new UnsupportedOperationException(TODO.method());
-	}
+		return nesteledig;
+	}	
 	
 	public Innlegg[] getSamling() {
-		throw new UnsupportedOperationException(TODO.method());
+		return innleggtabell;
 
 	}
 	
 	public int finnInnlegg(Innlegg innlegg) {
-
-		throw new UnsupportedOperationException(TODO.method());
-	}
+//		returnerer indeks (posisjon) i tabellen for et innlegg i samlingen med 
+//		samme id som parameteren innlegg (om en slik finnes) og -1 ellers. 
+//		Bruk erLik-metoden for Innlegg-objekt i implementasjonen
+		
+		int posisjon = 0;
+		boolean funnet = false; 
+		
+		while (posisjon < nesteledig && !funnet ) {
+			if (innleggtabell[posisjon].erLik(innlegg) == true) {
+				funnet = true;
+				return posisjon;
+			} else {
+				posisjon++;
+			}
+		}
+		return -1;
+}
 
 	public boolean finnes(Innlegg innlegg) {
-		throw new UnsupportedOperationException(TODO.method());
+//		 returnerer true om der finnes et innlegg i samlingen med samme id som innlegget gitt ved parameteren innlegg.
+		
+		boolean funnet = false;
+		int posisjon = 0;
+		
+		while (posisjon < nesteledig && !funnet) {
+			if (innlegg.getId() == innleggtabell[posisjon].getId()) {
+				funnet = true;
+			} else {
+				posisjon++;
+			}
+		}
+		
+		return funnet;
+		
 	}
 
 	public boolean ledigPlass() {
-		throw new UnsupportedOperationException(TODO.method());
+//		returnerer true om der er ledig plass i samlingen og false ellers.
+		
+		if (nesteledig < innleggtabell.length) {
+			return true;
+		} else {
+			return false;
+		}
 
 	}
 	
 	public boolean leggTil(Innlegg innlegg) {
-
-		throw new UnsupportedOperationException(TODO.method());
-	}
-	
+//		legger innlegg inn i tabellen. Dersom der ikke finnes et innlegg i tabellen med 
+//		samme id som innlegg skal metoden legge til innlegget på neste ledige plass i 
+//		tabellen. Ellers skal ikke metoden legge inn innlegg i tabellen. Metoden skal 
+//		returnere true om innlegget blev lagt til og false ellers.
+		
+		if (finnes(innlegg) == false) {
+			innleggtabell[nesteledig] = innlegg;
+			nesteledig++;
+			return true;
+		} else {
+			return false;
+		}		
+}
+	@Override
 	public String toString() {
-		throw new UnsupportedOperationException(TODO.method());
+		
+		String txt = String.format("%d\n" + Tekst.toString() + Bilde.toString(), nesteledig);
+		return txt;
 	}
 
 	// valgfrie oppgaver nedenfor
