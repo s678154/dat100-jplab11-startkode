@@ -34,7 +34,6 @@ public class Tekst extends Innlegg {
 	public String toString() {
 		
 		String txtTEKST = String.format("TEKST\n" + super.toString() + "%s\n", tekst);
-//		String txtTEKST = String.format("TEKST\n%d\n%s\n%s\n%d\n%s\n", super.getId(),super.getBruker(),super.getDato(),super.getLikes(),tekst);
 		return txtTEKST;
 
 	}

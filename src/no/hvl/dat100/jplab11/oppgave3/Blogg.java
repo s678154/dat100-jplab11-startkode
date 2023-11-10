@@ -9,7 +9,6 @@ public class Blogg{
 
 	private int nesteledig; //angir antall Innlegg-objekt som er lagret i tabellen og dermed neste ledige posisjon i tabellen
 	private Innlegg[] innleggtabell; // er en referanse tabell av Innlegg-objekt.
-	private int lengde;
 	
 	public Blogg() {
 		innleggtabell = new Innlegg[20];
@@ -18,7 +17,6 @@ public class Blogg{
 	}
 
 	public Blogg(int lengde) {
-		this.lengde = lengde;
 		innleggtabell = new Innlegg[lengde];
 		nesteledig = 0;
 	}
@@ -97,8 +95,32 @@ public class Blogg{
 	@Override
 	public String toString() {
 		
-		String txt = String.format("%d\n" + Tekst.toString() + Bilde.toString(), nesteledig);
-		return txt;
+		StringBuilder sb = new StringBuilder();
+	    sb.append(nesteledig).append("\n");
+
+	    for (int i = 0; i < nesteledig; i++) {
+	        if (innleggtabell[i] instanceof Tekst) {
+	            sb.append(((Tekst) innleggtabell[i]).toString());
+	        } else if (innleggtabell[i] instanceof Bilde) {
+	            sb.append(((Bilde) innleggtabell[i]).toString());
+	        }
+	    }
+
+	    return sb.toString();
+		
+//	    Versjon 2 (uten Stringbuilder):
+//	     String txt = nesteledig + "\n";
+//
+//	    for (int i = 0; i < nesteledig; i++) {
+//	        if (innleggtabell[i] instanceof Tekst) {
+//	            txt += ((Tekst) innleggtabell[i]).toString();
+//	        } else if (innleggtabell[i] instanceof Bilde) {
+//	            txt += ((Bilde) innleggtabell[i]).toString();
+//	        }
+//	    }
+//
+//	    return txt;
+//	}     
 	}
 
 	// valgfrie oppgaver nedenfor

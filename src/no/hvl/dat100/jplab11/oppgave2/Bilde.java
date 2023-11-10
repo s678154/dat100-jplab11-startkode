@@ -28,7 +28,6 @@ public class Bilde extends Tekst {
 	@Override
 	public String toString() {
 		
-//		String txtBILDE = String.format("BILDE\n" + super.toString() + "%s\n%s\n", super.getTekst(), url);
 		String txtBILDE = String.format("BILDE\n%d\n%s\n%s\n%d\n%s\n%s\n", super.getId(),super.getBruker(),super.getDato(),super.getLikes(),super.getTekst(),url);
 		return txtBILDE;
 
