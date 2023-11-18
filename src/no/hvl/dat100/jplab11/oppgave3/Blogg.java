@@ -133,7 +133,7 @@ public class Blogg{
 		Innlegg[] nyInnleggTabell = new Innlegg[2 * innleggtabell.length];
 		
 		for (int i = 0 ; i < nesteledig ; i++) {
-			innleggtabell[i] = nyInnleggTabell[i];
+			nyInnleggTabell[i] = innleggtabell[i];
 		}
 		
 		innleggtabell = nyInnleggTabell;
