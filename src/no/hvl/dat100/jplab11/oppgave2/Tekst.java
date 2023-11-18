@@ -18,7 +18,7 @@ public class Tekst extends Innlegg {
 	}
 	
 	public Tekst(int id, String bruker, String dato, int likes, String tekst) {
-		super(id,bruker,dato,likes);
+		super(id, bruker, dato, likes);
 		this.tekst = tekst;
 	}
 	
@@ -41,7 +41,8 @@ public class Tekst extends Innlegg {
 	// Metoden nedenfor er kun for valgfri oppgave 6
 	public String toHTML() {
 			
-		throw new UnsupportedOperationException(TODO.method());
+		return "<p>" + getTekst() + "</p>\n";
+		//throw new UnsupportedOperationException(TODO.method());
 				
 	}
 }

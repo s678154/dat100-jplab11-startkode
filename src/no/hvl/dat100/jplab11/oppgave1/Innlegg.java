@@ -15,7 +15,11 @@ public abstract class Innlegg {
 	
 	public Innlegg(int id, String bruker, String dato) {
 
-		this(id, bruker, dato, 0);
+		//this(id, bruker, dato, 0);
+		this.id = id;
+		this.bruker = bruker;
+		this.dato = dato;
+		this.likes = 0;
 		
 	}
 
@@ -77,7 +81,8 @@ public abstract class Innlegg {
 	// Metoden nedenfor er kun for valgfri oppgave 6
 	public String toHTML() {
 		
-		throw new UnsupportedOperationException(TODO.method());
+		return "<h2>" + getBruker() + "@" + getDato() + " [" + getLikes() + "]</h2>\n";
+		//throw new UnsupportedOperationException(TODO.method());
 				
 	}
 }
