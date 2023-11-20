@@ -33,7 +33,7 @@ public class LesBlogg {
 				nysamling = new Blogg(antallInnlegg);
 			}
 			
-			do {
+			while (line != null) {
 				line = br.readLine();
 				
 				if (line != null && line.trim().equals(TEKST)) {
@@ -54,7 +54,7 @@ public class LesBlogg {
 					
 					nysamling.leggTil(new Bilde(id, bruker, dato, likes, tekst, url));
 				}
-			} while (line != null);
+			} 
 		} catch (FileNotFoundException e) {
 			System.err.println(e.getMessage());
 		} catch (IOException e) {
