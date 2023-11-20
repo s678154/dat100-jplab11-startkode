@@ -25,6 +25,45 @@ public class LesBlogg {
 	public static Blogg les(String mappe, String filnavn) {
 		Blogg nysamling = null;
 		
+		try (BufferedReader br = new BufferedReader(new FileReader(mappe + filnavn))) {
+			String line = br.readLine();
+			
+			if (line != null) {
+				int antallInnlegg = Integer.parseInt(line.trim());
+				nysamling = new Blogg(antallInnlegg);
+			}
+			
+			do {
+				line = br.readLine();
+				
+				if (line != null && line.trim().equals(TEKST)) {
+					int id = Integer.parseInt(br.readLine().trim());
+					String bruker = br.readLine().trim();
+					String dato = br.readLine().trim();
+					int likes = Integer.parseInt(br.readLine().trim());
+					String tekst = br.readLine().trim();
+					
+					nysamling.leggTil(new Tekst(id, bruker, dato, likes, tekst));
+				} else if (line != null && line.trim().equals(BILDE)) {
+					int id = Integer.parseInt(br.readLine().trim());
+					String bruker = br.readLine().trim();
+					String dato = br.readLine().trim();
+					int likes = Integer.parseInt(br.readLine().trim());
+					String tekst = br.readLine().trim();
+					String url = br.readLine().trim();
+					
+					nysamling.leggTil(new Bilde(id, bruker, dato, likes, tekst, url));
+				}
+			} while (line != null);
+		} catch (FileNotFoundException e) {
+			System.err.println(e.getMessage());
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		return nysamling;
+		/*Blogg nysamling = null;
+		
 		try (BufferedReader br = new BufferedReader(new FileReader(mappe+filnavn))){
 			String line = br.readLine();
 			
@@ -34,6 +73,8 @@ public class LesBlogg {
 			}
 			
 			do { // leser resten av filen 
+				line = br.readLine(); // LES NESTE LINJE
+				
 				if (line.trim().equals(TEKST)) {
 					int id = Integer.parseInt(br.readLine().trim());
 	                String bruker = br.readLine().trim();
@@ -60,7 +101,7 @@ public class LesBlogg {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-	return nysamling;	
+	return nysamling;*/
 
 	}
 }
